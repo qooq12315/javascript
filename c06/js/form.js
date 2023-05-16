@@ -7,7 +7,10 @@ let termHintElement = document.getElementById('termsHint')
 
 formElement.addEventListener('submit', (event) => {
     console.log('submitting')
-    event.preventDefault()
+    if (!termElement.checked) {
+    termHintElement.innerHTML = '請打勾同意'
+        event.preventDefault()
+    }
 })
 
 packageElement.addEventListener('change', (event) => {
