@@ -11,7 +11,7 @@ formElement.addEventListener('submit', (event) => {
 })
 
 packageElement.addEventListener('change', (event) => {
-    console.log('changing') 
+    console.log('changing')
     /*
     for(const option of packageElement.options){
         console.log(option.label)
@@ -19,10 +19,10 @@ packageElement.addEventListener('change', (event) => {
     }*/
 
     let selectedIndex = packageElement.selectedIndex
-    if(packageElement.options[selectedIndex].value === 'monthly'){
+    if (packageElement.options[selectedIndex].value === 'monthly') {
         packageHintElement.innerHTML = '如果選擇1年,可以省10元美金!'
-    }else{
+    } else {
         packageHintElement.innerHTML = '正確的選擇!'
-    
+
     }
 })
