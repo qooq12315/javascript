@@ -1,9 +1,13 @@
 function reqListener() {
     let youbikedata = JSON.parse(this.responseText)
+    let sarea_array = []
     for(const youbike of youbikedata){
-        console.log(youbike.sna);
+        sarea_array.push(youbike.sarea)
     } 
+    sarea_array = [...new Set(sarea_array)]
+    console.log(sarea_array)
 }
+
 
 const windowload = (event) => {
     console.log('網頁已經全部被載入');
