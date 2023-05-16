@@ -3,8 +3,9 @@ let lastkeyElement = document.getElementById('lastKey');
 let charDisplay = document.getElementById('charactersLeft');
 
 messageElement.addEventListener('keyup', (event) => {
-    lastkeyElement.textContent = `最後一個key:${event.key},keycode:${event.code}`;
+    lastkeyElement.textContent = `最後一個key :${event.key},keycode:${event.Code}`;
     let textEntered = messageElement.value
-    let counter = 180 - textEntered.length
+    let counter = 180-textEntered.length
     charDisplay.textContent = `還剩下:${counter}個字`
+
 });
