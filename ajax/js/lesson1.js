@@ -20,6 +20,7 @@ function reqListener() {
     for (const area of sarea_array) {
         let optionElement = document.createElement('option')
         optionElement.textContent = area
+        optionElement.setAttribute('value', area)
         sareaElement.appendChild(optionElement)
     }
 }
