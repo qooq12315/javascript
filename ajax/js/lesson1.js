@@ -95,6 +95,15 @@ const windowload = (event) => {
 window.addEventListener('load', windowload)
 
 //map內的離開的click
-exitElement.addEventListener('click', (event) => {
-    mapElement.className = 'close'
+element.addEventListener('click', (event) => {
+    event.preventDefault()
+    let aElement = event.currentTarget
+    //console.log(aElement.dataset.sno)
+    mapElement.className = 'overlay'
+    youbikedata.forEach(site => {
+        if (site.sno == aElement.dataset.sno) {
+            console.log(site.lat)
+            console.log(site.lng)
+        }
+    })
 })
