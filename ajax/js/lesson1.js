@@ -1,10 +1,13 @@
 let sarea_array = []
 let sareaElement = document.getElementById('sarea');
+let areaNameElement = document.getElementById('areaName')
+
 sareaElement.addEventListener('change', (event) => {
     let selectedIndex = sareaElement.selectedIndex;
     selectedValue = sareaElement.options[selectedIndex].value
     if (sarea_array.includes(selectedValue)) {
-        console.log('有這個行政區')
+        //console.log(`行政區:${selectedValue}`)
+        areaNameElement.innerText = selectedValue
     }
 });
 
