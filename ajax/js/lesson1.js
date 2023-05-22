@@ -102,8 +102,7 @@ element.addEventListener('click', (event) => {
     mapElement.className = 'overlay'
     youbikedata.forEach(site => {
         if (site.sno == aElement.dataset.sno) {
-            console.log(site.lat)
-            console.log(site.lng)
+            open('https://www.google.com/maps/place/'+ site.lat +','+site.lng)
         }
     })
 })
