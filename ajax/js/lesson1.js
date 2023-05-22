@@ -54,28 +54,28 @@ sareaElement.addEventListener('change', (event) => {
 });
 
 //xmlhttpRequest的listener
-function reqListener() {    
-    youbikedata = JSON.parse(this.responseText)    
-    for(const youbike of youbikedata){
-        sarea_array.push(youbike.sarea)    
+function reqListener() {
+    youbikedata = JSON.parse(this.responseText)
+    for (const youbike of youbikedata) {
+        sarea_array.push(youbike.sarea)
     }
     sarea_array = [...new Set(sarea_array)]
     let optionElement = document.createElement('option')
     optionElement.textContent = '請選擇行政區'
     sareaElement.appendChild(optionElement)
-    for(const area of sarea_array){
+    for (const area of sarea_array) {
         let optionElement = document.createElement('option')
         optionElement.textContent = area
-        optionElement.setAttribute('value',area)
+        optionElement.setAttribute('value', area)
         sareaElement.appendChild(optionElement)
     }
 }
 
 //監聽下載完成的http status
-function reqReadyChange(){
-    if(this.readyState == 4){
-        if(this.status != 200){
-            dialogElement.show()        
+function reqReadyChange() {
+    if (this.readyState == 4) {
+        if (this.status != 200) {
+            dialogElement.show()
         }
     }
 }
@@ -95,6 +95,6 @@ const windowload = (event) => {
 window.addEventListener('load', windowload)
 
 //map內的離開的click
-exitElement.addEventListener('click',(event)=>{
+exitElement.addEventListener('click', (event) => {
     mapElement.className = 'close'
 })
