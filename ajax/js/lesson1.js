@@ -23,6 +23,7 @@ sareaElement.addEventListener('change', (event) => {
                 } else {
                     var status = "維護中"
                 }
+
                 trHTML += "<tr>"
                 trHTML += "<td>" + element.sna.slice(11) + "</td>"
                 trHTML += "<td>" + element.ar + "</td>"
@@ -34,20 +35,40 @@ sareaElement.addEventListener('change', (event) => {
                 trHTML += `<td><a class="map" href="#" data-sno=${element.sno}>更多</a></td>`
                 trHTML += "</tr>"
             }
+
         });
         tbodyElement.innerHTML = trHTML
         //取得所有的a元素
         //a元素加入click事件
         //取出a元素的data-sno的屬性值
         //跳出<div class="map">對話欄
-
         let aElements = document.querySelectorAll('.map')
         aElements.forEach((element) => {
             element.addEventListener('click', (event) => {
                 event.preventDefault()
                 let aElement = event.currentTarget
-                console.log(aElement.dataset.sno)
+                //console.log(aElement.dataset.sno)
                 mapElement.className = 'overlay'
+                //加入showMap<div id="showMap"></div>
+                let showMapElement = document.createElement('div')
+                showMapElement.setAttribute('id', 'showMap')
+                mapElement.appendChild(showMapElement)
+
+                youbikedata.forEach(site => {
+                    if (site.sno == aElement.dataset.sno) {
+                        let zoom = 18; // 0 - 18
+                        let center = [site.lat, site.lng]; // 中心點座標
+                        let map = L.map('showMap').setView(center, zoom);
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: '© OpenStreetMap', // 商用時必須要有版權出處
+                            zoomControl: true, // 是否秀出 - + 按鈕
+                        }).addTo(map);
+                        let marker = L.marker(center, {
+                            title: '站點名稱',
+                            opacity: 1.0
+                        }).addTo(map)
+                    }
+                })
             })
         })
     }
@@ -79,31 +100,22 @@ function reqReadyChange() {
         }
     }
 }
-//windoew載入
+
+//window被載入的事件
 const windowload = (event) => {
     console.log('網頁已經全部被載入');
     const req = new XMLHttpRequest();
     req.addEventListener("load", reqListener);
     req.addEventListener("readystatechange", reqReadyChange)
     req.open("GET", "https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json");
-
+    /*模擬錯誤的網頁*/
     //req.open("GET", "https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v1/youbike_immediate.json");
-
     req.send();
 }
 
 window.addEventListener('load', windowload)
 
-//map內的離開的click
-element.addEventListener('click', (event) => {
-    event.preventDefault()
-    let aElement = event.currentTarget
-
-    //console.log(aElement.dataset.sno)
-    mapElement.className = 'overlay'
-    youbikedata.forEach(site => {
-        if (site.sno == aElement.dataset.sno) {
-            open('https://www.google.com/maps/place/' + site.lat + ',' + site.lng)
-        }
-    })
+//map內的離開的click事件
+exitElement.addEventListener('click', (event) => {
+    mapElement.className = 'close'
 })

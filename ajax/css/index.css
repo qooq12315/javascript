@@ -9,7 +9,6 @@ table {
 }
 
 .overlay {
-    opacity: 0.8;
     background-color: #ccc;
     position: fixed;
     width: 100%;
@@ -24,8 +23,9 @@ table {
 }
 
 #showMap {
-    height: 400px;
+    height: 600px;
     /* The height is 400 pixels */
+
     width: 100%;
     /* The width is the width of the web page */
 }
