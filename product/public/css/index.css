@@ -1,15 +1,150 @@
-.header{
+/*手機直的*/
+#container{
+    display:grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 8em auto auto 8em;
+    grid-template-areas:
+    "header"
+    "nav"
+    "main"
+    "footer";
+    width:100%;
+}
+.header{    
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content:center;
+    align-items: center;
     background-color: beige;
+    grid-area:header;
 }
 
 .nav{
-    background-color: greenyellow;
+    background-color: aqua;
+    grid-area:nav;
+}
+
+.nav ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav a{
+    display: block;
+    padding: 1em;
+    text-decoration: none;
+    text-align: center;
+    color: black;
+    font-weight: bold;
 }
 
 .main{
-    background-color: aqua;
+background-color: rgba(192, 217, 255, 0.815);    
+grid-area:main;
 }
 
 .footer{
-    background-color: lightpink;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content:center;
+    align-items: center;
+    background-color: rgba(255, 192, 250, 0.425);
+    grid-area:footer;
+}
+
+form .alert{
+    color: red;
+    font-size: 0.8em;
+}
+
+form .close{
+    display: none;
+}
+
+/*手機橫的*/
+@media (min-width: 576px) {  }
+
+/*平版*/
+@media (min-width: 768px) { 
+    #container{
+        display:grid;
+        grid-template-columns: 200px 1fr;
+        grid-template-rows: 8em auto 8em;
+        grid-template-areas:
+        "header header"
+        "nav main"
+        "footer footer";
+    }
+    .header{    
+        display:flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content:center;
+        align-items: center;
+        background-color: rgba(249, 252, 173, 0.493);
+        grid-row-start:1;
+        grid-row-end: 2;
+        grid-column-start: 1;
+        grid-column-end:3;
+    }
+    
+    .nav{
+        background-color: aqua;
+        grid-row: 2 / 3;
+        grid-column: 1 / span 1;
+    }
+    
+    .nav ul{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .nav a{
+        display: block;
+        padding: 1em;
+        text-decoration: none;
+        text-align: center;
+        color: black;
+        font-weight: bold;
+    }
+    
+    .main{
+        background-color: rgba(192, 237, 255, 0.678);
+        grid-row: 2 / 3;
+        grid-column:2 / 3;
+    }
+    
+    .footer{
+        display:flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content:center;
+        align-items: center;
+        background-color: rgba(255, 192, 250, 0.425);
+        grid-area:footer;
+    }
+    
+}
+
+/*筆電*/
+@media (min-width: 992px) { }
+
+/*桌機*/
+@media (min-width: 1200px) { 
+    #container{
+        width:1140px;
+        margin:0 auto;
+    }
+}
+
+/*電競*/
+@media (min-width: 1400px) { 
+    #container{
+        width:1320px;
+        margin:0 auto;
+    }
 }
