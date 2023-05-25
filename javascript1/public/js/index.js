@@ -49,12 +49,13 @@ sareaElement.addEventListener('change', (event) => {
                 let aElement = event.currentTarget
                 //console.log(aElement.dataset.sno)
                 mapElement.className = 'overlay'
+
                 //加入showMap<div id="showMap"></div>
-                let showMapElement =document.createElement('div')
-                showMapElement.setAttribute('id','showMap')
+                let showMapElement = document.createElement('div')
+                showMapElement.setAttribute('id', 'showMap')
                 //mapElement.appendChild(showMapElement)
-                mapElement.insertBefore(showMapElement,mapElement.childNodes[0])
-                
+                mapElement.insertBefore(showMapElement, mapElement.childNodes[0])
+
                 youbikedata.forEach(site => {
                     if (site.sno == aElement.dataset.sno) {
                         let zoom = 18; // 0 - 18
@@ -119,6 +120,6 @@ window.addEventListener('load', windowload)
 //map內的離開的click事件
 exitElement.addEventListener('click', (event) => {
     mapElement.className = 'close'
-    let showMapElement = document.getElementById('showMap')
+    let showMapElement = document.querySelector('#showMap')
     showMapElement.remove()
 })
