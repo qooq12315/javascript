@@ -1,6 +1,24 @@
 let formElement = document.querySelector('#form')
-
 let allOfDataArray = [];
+
+const setupCurrentDate = () => {
+    let current = new Date()
+    let year = current.getFullYear()
+    let month = current.getMonth()+1
+    let date = current.getDate()
+
+
+    let month_string = String(month).padStart(2,"0")
+    let date_string = String(date).padStart(2,"0")
+    let current_date_string = `${year}-${month_string}-${date_string}`
+
+    let dateElement = document.querySelector('#warrantyDate')
+    dateElement.value = current_date_string
+    dateElement.min = current_date_string
+}
+
+//setup現在的日期
+setupCurrentDate()
 
 const validateName = ()=>{
     let inputNameElement = document.querySelector('#inputName')
@@ -30,12 +48,38 @@ const validateCodeFormat = () =>{
     }
     allOfDataArray.push({'code':inputCodeValue})
 }
+
+const checkRadioValue = () => {
+    let radionElements = document.querySelectorAll('.form-check-input')
+    radionElements.forEach(element => {
+        if(element.checked){
+            //console.log(element.value)
+            allOfDataArray.push({'catgory':element.value})
+        }
+    })
+}
+
+
+const warrantyCheck = () => {
+    let checkboxElement = document.querySelector('#warrantyCheck1')
+    
+    if (checkboxElement.checked){
+        allOfDataArray.push({'warranty':true})
+}else{
+    allOfDataArray.push({'warranty':false})
+}
+}
+const getWranntyDate = () => {
+    let dateElement = document.querySelector('#warrantyDate')
+    allOfDataArray.push({'warrantyDate':dateElement.value})
+}
+
 const clearAllAlertAndData = ()=>{
-    //清除產品的警告
+    //清除產品警告
     let nameAlertElement = document.querySelector('#nameAlert')
     nameAlertElement.classList.add("close")
 
-    //清除code的警告
+    //清除code警告
     let codeAlertElement = document.querySelector('#codeAlert')
     codeAlertElement.classList.add("close")
 
@@ -43,10 +87,30 @@ const clearAllAlertAndData = ()=>{
     allOfDataArray = []
 }
 
+const setEmpty = () => {
+    let inputNameElement = document.querySelector('#inputName')
+    inputNameElement.value = ""
+
+    let inputCodeElement = document.querySelector('#inputCode')
+    inputCodeElement.value = ""
+
+    let radio1Element = document.querySelector('#inlineRadio1')
+    radio1Element.checked = true
+
+    let checkboxElement = document.querySelector('#warrantyCheck1')
+    checkboxElement.checked = false
+
+    setupCurrentDate()
+}
+
 formElement.addEventListener('submit',(event)=>{
     clearAllAlertAndData()
     event.preventDefault()
     validateName()
     validateCodeFormat()
+    checkRadioValue()
+    warrantyCheck()
+    getWranntyDate()
     console.log(allOfDataArray)
+    setEmpty()
 })
