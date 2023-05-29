@@ -1,15 +1,30 @@
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js'
+
+import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js'
+
+const firebaseConfig = {
+    apiKey: "AIzaSyCFYAQfudXXkRKjVxQ_aR7ZJmY6KtWRL0w",
+    authDomain: "project-javascript-3b291.firebaseapp.com",
+    projectId: "project-javascript-3b291",
+    storageBucket: "project-javascript-3b291.appspot.com",
+    messagingSenderId: "467636868546",
+    appId: "1:467636868546:web:9a38f14a4f20db9231f25b"
+};
+
+const app = initializeApp(firebaseConfig);
+
 let formElement = document.querySelector('#form')
 let allOfDataArray = [];
 
 const setupCurrentDate = () => {
     let current = new Date()
     let year = current.getFullYear()
-    let month = current.getMonth()+1
+    let month = current.getMonth() + 1
     let date = current.getDate()
 
 
-    let month_string = String(month).padStart(2,"0")
-    let date_string = String(date).padStart(2,"0")
+    let month_string = String(month).padStart(2, "0")
+    let date_string = String(date).padStart(2, "0")
     let current_date_string = `${year}-${month_string}-${date_string}`
 
     let dateElement = document.querySelector('#warrantyDate')
@@ -20,41 +35,41 @@ const setupCurrentDate = () => {
 //setup現在的日期
 setupCurrentDate()
 
-const validateName = ()=>{
+const validateName = () => {
     let inputNameElement = document.querySelector('#inputName')
     let nameAlertElement = document.querySelector('#nameAlert')
     let productName = inputNameElement.value
-    if (productName.length == 0){
+    if (productName.length == 0) {
         //console.log("沒有填資料")
         nameAlertElement.classList.remove("close")
         return
     }
-    allOfDataArray.push({'productName':productName})
+    allOfDataArray.push({ 'productName': productName })
 }
 
-const validateCodeFormat = () =>{
+const validateCodeFormat = () => {
     let inputCodeElement = document.querySelector('#inputCode')
     let codeAlertElement = document.querySelector('#codeAlert')
     let inputCodeValue = inputCodeElement.value
-    
+
     //正規則表達式
     const codePatternReg = /\w\w\w-\w\w\w-\w\w\w/g
 
-    if (inputCodeValue.length == 0 || codePatternReg.test(inputCodeValue) == false){
+    if (inputCodeValue.length == 0 || codePatternReg.test(inputCodeValue) == false) {
         //console.log("沒有填資料")
         codeAlertElement.classList.remove("close")
         console.log("執行錯誤")
         return
     }
-    allOfDataArray.push({'code':inputCodeValue})
+    allOfDataArray.push({ 'code': inputCodeValue })
 }
 
 const checkRadioValue = () => {
     let radionElements = document.querySelectorAll('.form-check-input')
     radionElements.forEach(element => {
-        if(element.checked){
+        if (element.checked) {
             //console.log(element.value)
-            allOfDataArray.push({'catgory':element.value})
+            allOfDataArray.push({ 'catgory': element.value })
         }
     })
 }
@@ -62,19 +77,19 @@ const checkRadioValue = () => {
 
 const warrantyCheck = () => {
     let checkboxElement = document.querySelector('#warrantyCheck1')
-    
-    if (checkboxElement.checked){
-        allOfDataArray.push({'warranty':true})
-}else{
-    allOfDataArray.push({'warranty':false})
-}
+
+    if (checkboxElement.checked) {
+        allOfDataArray.push({ 'warranty': true })
+    } else {
+        allOfDataArray.push({ 'warranty': false })
+    }
 }
 const getWranntyDate = () => {
     let dateElement = document.querySelector('#warrantyDate')
-    allOfDataArray.push({'warrantyDate':dateElement.value})
+    allOfDataArray.push({ 'warrantyDate': dateElement.value })
 }
 
-const clearAllAlertAndData = ()=>{
+const clearAllAlertAndData = () => {
     //清除產品警告
     let nameAlertElement = document.querySelector('#nameAlert')
     nameAlertElement.classList.add("close")
@@ -103,7 +118,7 @@ const setEmpty = () => {
     setupCurrentDate()
 }
 
-formElement.addEventListener('submit',(event)=>{
+formElement.addEventListener('submit', (event) => {
     clearAllAlertAndData()
     event.preventDefault()
     validateName()
