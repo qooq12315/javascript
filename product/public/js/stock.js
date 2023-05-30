@@ -35,5 +35,30 @@ formElement.addEventListener('submit', (event) => {
     let url = `https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=${fullDateString}01&stockNo=${stockId}`
 
     console.log(url)
+    fetch(new Request(url))
+        .then((response) => {
+            return response.json()
 
+        }).then((r) => {
+            console.log(r)
+            let tbodyElement = document.querySelector('tbody')
+            let rowHtmlString = ""
+
+            r.data.forEach(array => {
+
+                rowHtmlString += "<tr>"
+                rowHtmlString += `<td>${array[0]}</td>`
+                rowHtmlString += `<td>${array[1]}</td>`
+                rowHtmlString += `<td>${array[2]}</td>`
+                rowHtmlString += `<td>${array[3]}</td>`
+                rowHtmlString += `<td>${array[4]}</td>`
+                rowHtmlString += `<td>${array[5]}</td>`
+                rowHtmlString += `<td>${array[6]}</td>`
+                rowHtmlString += `<td>${array[7]}</td>`
+                rowHtmlString += `<td>${array[8]}</td>`
+                rowHtmlString += "</tr>"
+            })
+            tbodyElement.innerHTML = rowHtmlString
+        })
 })
+
